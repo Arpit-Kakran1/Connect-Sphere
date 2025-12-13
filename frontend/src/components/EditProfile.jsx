@@ -9,6 +9,7 @@ import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { setAuthUser } from "@/redux/authSlice";
+import axiosInstance from "@/lib/axios";
 
 const EditProfile = () => {
   const { user } = useSelector(store => store.auth);
@@ -42,15 +43,15 @@ const EditProfile = () => {
     const formData = new FormData();
     formData.append("bio", input.bio);
     formData.append("gender", input.gender);
-    // Only append the photo if a new one was selected
+
     if (input.profilePhoto) {
       formData.append("profilePhoto", input.profilePhoto);
     }
 
     try {
 
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/user/profile/edit",
+      const res = await axiosInstance.post(
+        "/user/profile/edit",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

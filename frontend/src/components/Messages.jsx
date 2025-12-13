@@ -11,38 +11,51 @@ const Messages = ({ selectedUser }) => {
   useGetAllMessage();
   const { user } = useSelector(store => store.auth);
   const { messages } = useSelector(store => store.chat);
-  return (
-    <div className='flex-1 overflow-y-auto p-4'>
-      <div className="flex justify-center">
 
+  return (
+    <div className="flex flex-col h-full w-full overflow-y-auto p-4">
+
+
+      <div className="flex justify-center shrink-0">
         <div className="flex flex-col justify-center items-center">
           <Avatar className="h-18 w-18">
             <AvatarImage src={selectedUser?.profilePicture} alt="profile" />
-            <AvatarFallback />CN
+            <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <span className='cursor-pointer'>
-            <Link to={`/profile/${selectedUser?._if}`}><Button variant="secondary" className="my-2 h-7 cursor-pointer">View Profile</Button></Link>
+          <span className="cursor-pointer">
+            <Link to={`/profile/${selectedUser?._id}`}>
+              <Button variant="secondary" className="my-2 h-7">
+                View Profile
+              </Button>
+            </Link>
           </span>
         </div>
-
       </div>
-      <div className='flex flex-col gap-3'>
-        {
-          Array.isArray(messages) && messages.map((msg) => {
-            console.log(msg);
 
-            return (
-              <div key={msg._id} className={`flex px-5 ${msg.senderId === user?._id ? "justify-end" : "justify-start"}`}>
-                <div className={`p-2 rounded-lg max-w-xs break-words ${msg.senderId === user?._id ? "bg-blue-400" : "bg-gray-200 text-black"}`}>
-                  {msg.message}
-                </div>
+      <div className="flex flex-col gap-3 flex-1">
+        {Array.isArray(messages) &&
+          messages.map((msg) => (
+            <div
+              key={msg._id}
+              className={`flex px-5 ${msg.senderId === user?._id
+                ? "justify-end"
+                : "justify-start"
+                }`}
+            >
+              <div
+                className={`p-2 rounded-lg max-w-xs break-words ${msg.senderId === user?._id
+                  ? "bg-blue-400"
+                  : "bg-gray-200 text-black"
+                  }`}
+              >
+                {msg.message}
               </div>
-            )
-          })
-        }
+            </div>
+          ))}
       </div>
     </div>
   )
 }
 
 export default Messages
+

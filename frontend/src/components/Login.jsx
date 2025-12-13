@@ -9,6 +9,8 @@ import { Loader2 } from 'lucide-react'
 import { setAuthUser } from '@/redux/authSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import store from '@/redux/store'
+import logo from '../assets/logo_1.jpg'
+import axiosInstance from '@/lib/axios'
 
 const SignUp = () => {
   const [input, setInput] = useState({
@@ -26,7 +28,7 @@ const SignUp = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      const res = await axios.post("http://localhost:8000/api/v1/user/login", input, {
+      const res = await axiosInstance.post("/user/login", input, {
         headers: {
           "Content-Type": 'application/json'
         },
@@ -58,7 +60,11 @@ const SignUp = () => {
       <form action="" onSubmit={signupHandler} className='shadow-lg flex flex-col gap-5 p-8 w-100'>
 
         <div className="my-4">
-          <h1 className='text-center font-bold text-xl mb-1'>Logo</h1>
+          <img
+            src={logo}
+            className='h-12 w-12 rounded-md m-auto'
+          >
+          </img>
           <p className='text-sm text-center'>Login</p>
         </div>
         <div className='flex flex-col gap-6'>

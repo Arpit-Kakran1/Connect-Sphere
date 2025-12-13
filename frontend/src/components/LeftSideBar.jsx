@@ -14,6 +14,7 @@ import { Popover, PopoverContent } from "./ui/popover";
 import { PopoverTrigger } from "@radix-ui/react-popover";
 import { Button } from "./ui/button";
 import { setClearNotification } from "@/redux/rtnSlice";
+import axiosInstance from "@/lib/axios";
 
 const LeftSideBar = () => {
 
@@ -28,7 +29,7 @@ const LeftSideBar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/user/logout", { withCredentials: true });
+      const res = await axiosInstance.get("/user/logout", { withCredentials: true });
       if (res.data.message) {
         dispatch(setAuthUser(null));
         dispatch(setSelectedPost(null));
@@ -57,8 +58,7 @@ const LeftSideBar = () => {
 
   const sidebarItems = [
     { icon: <Home size={24} />, text: "Home" },
-    { icon: <Search size={24} />, text: "Search" },
-    { icon: <TrendingUp size={24} />, text: "Explore" },
+
     { icon: <MessageCircle size={24} />, text: "Messages" },
     { icon: <Heart size={24} />, text: "Notifications" },
     { icon: <PlusSquare size={24} />, text: "Create" },
@@ -82,7 +82,7 @@ const LeftSideBar = () => {
     <>
       <div className="hidden md:flex fixed top-0 left-0 h-screen w-64 bg-white border-r border-gray-200 flex-col p-6 z-10">
         <div className="mb-3">
-          <h1 className="text-2xl font-bold">Connect Sphere</h1>
+          <h1 className="text-2xl font-bold">Connect</h1>
         </div>
         <nav className="flex-grow">
           <div className="flex flex-col gap-4">
@@ -150,7 +150,7 @@ const LeftSideBar = () => {
           {logoutItem.icon}
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-2xl font-bold">Connect Sphere</h1>
+          <h1 className="text-2xl font-bold">Connect</h1>
         </div>
 
         <div className="flex items-center gap-2">
@@ -189,7 +189,6 @@ const LeftSideBar = () => {
           </div>
         </div>
       </header>
-      //Mobile
       <nav className="fixed bottom-0 left-0 w-full h-16 bg-white border-t z-10 flex md:hidden items-center justify-around px-2">
         {
           mobileBottomItems.map((item) => (

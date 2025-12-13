@@ -6,6 +6,8 @@ import React, { use, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import logo from '../assets/logo_1.jpg'
+import axiosInstance from '@/lib/axios'
 
 const SignUp = () => {
   const [input, setInput] = useState({
@@ -24,7 +26,7 @@ const SignUp = () => {
     try {
       setLoading(true);
       e.preventDefault();
-      const res = await axios.post("http://localhost:8000/api/v1/user/register", input, {
+      const res = await axiosInstance.post("/user/register", input, {
         headers: {
           "Content-Type": 'application/json'
         },
@@ -56,7 +58,11 @@ const SignUp = () => {
       <form action="" onSubmit={signupHandler} className='shadow-lg flex flex-col gap-5 p-8 w-100'>
 
         <div className="my-4">
-          <h1 className='text-center font-bold text-xl mb-1'>Logo</h1>
+          <img
+            src={logo}
+            className='h-12 w-12 rounded-md m-auto'
+          >
+          </img>
           <p className='text-sm text-center'>Sign Up to get started</p>
         </div>
         <div className='flex flex-col gap-6'>
