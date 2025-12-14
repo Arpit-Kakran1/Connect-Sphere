@@ -119,7 +119,6 @@ API_SECRET=your_cloudinary_api_secret
 
 ▶️ Installation & Run Locally
 # Clone repository
-git clone https://github.com/your-username/connect-sphere.git
 
 # Install dependencies
 npm install
